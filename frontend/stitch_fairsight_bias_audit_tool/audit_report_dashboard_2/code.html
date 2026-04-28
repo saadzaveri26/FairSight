@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FairSight Audit Report</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Space+Grotesk:wght@700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#502400",
+                    "surface-container-high": "#272a31",
+                    "tertiary": "#ffb786",
+                    "surface-container-lowest": "#0b0e15",
+                    "on-primary": "#002e6a",
+                    "secondary": "#c5c6ce",
+                    "surface-container-low": "#191b23",
+                    "on-tertiary-fixed-variant": "#723600",
+                    "on-secondary-fixed-variant": "#45464e",
+                    "on-primary-fixed-variant": "#004395",
+                    "surface-container": "#1d2027",
+                    "inverse-on-surface": "#2e3038",
+                    "on-background": "#e1e2ec",
+                    "error-container": "#93000a",
+                    "background": "#10131a",
+                    "secondary-fixed": "#e2e2eb",
+                    "secondary-container": "#45464e",
+                    "on-error": "#690005",
+                    "on-secondary-fixed": "#191b22",
+                    "outline": "#8c909f",
+                    "tertiary-fixed-dim": "#ffb786",
+                    "secondary-fixed-dim": "#c5c6ce",
+                    "on-error-container": "#ffdad6",
+                    "surface-tint": "#adc6ff",
+                    "primary-fixed-dim": "#adc6ff",
+                    "on-secondary-container": "#b4b4bd",
+                    "surface-variant": "#32353c",
+                    "surface-container-highest": "#32353c",
+                    "on-surface-variant": "#c2c6d6",
+                    "inverse-primary": "#005ac2",
+                    "on-tertiary-container": "#461f00",
+                    "on-primary-container": "#00285d",
+                    "on-secondary": "#2e3037",
+                    "on-primary-fixed": "#001a42",
+                    "primary-container": "#4d8eff",
+                    "inverse-surface": "#e1e2ec",
+                    "on-surface": "#e1e2ec",
+                    "outline-variant": "#424754",
+                    "on-tertiary-fixed": "#311400",
+                    "surface-dim": "#10131a",
+                    "tertiary-container": "#df7412",
+                    "surface": "#10131a",
+                    "primary": "#adc6ff",
+                    "surface-bright": "#363941",
+                    "error": "#ffb4ab",
+                    "primary-fixed": "#d8e2ff",
+                    "tertiary-fixed": "#ffdcc6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "20px",
+                    "margin": "32px",
+                    "base": "4px",
+                    "sm": "8px",
+                    "xl": "48px",
+                    "md": "16px",
+                    "lg": "24px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "h2": ["Inter"],
+                    "body-md": ["Inter"],
+                    "data-display": ["JetBrains Mono"],
+                    "h1": ["Inter"],
+                    "label-caps": ["Space Grotesk"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "data-display": ["14px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bias-gauge-container {
+            width: 120px;
+            height: 120px;
+            position: relative;
+        }
+        .gauge-svg {
+            transform: rotate(-90deg);
+        }
+        .gauge-track {
+            fill: none;
+            stroke: #1e293b;
+            stroke-width: 8;
+        }
+        .gauge-indicator {
+            fill: none;
+            stroke: #ffb4ab;
+            stroke-width: 8;
+            stroke-dasharray: 282.7;
+            stroke-dashoffset: 164; /* 42/100 */
+            stroke-linecap: round;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-hidden">
+<!-- TopNavBar -->
+<header class="bg-slate-950/80 backdrop-blur-md docked full-width top-0 z-50 border-b border-slate-800 flex justify-between items-center w-full px-6 h-16 fixed">
+<div class="flex items-center gap-md">
+<span class="text-lg font-black tracking-tight text-white">FairSight</span>
+<div class="h-4 w-px bg-slate-700 mx-2"></div>
+<div class="flex flex-col">
+<span class="font-body-sm font-medium text-white">Audit Report — adult_income.csv</span>
+<span class="text-[10px] font-data-display text-slate-500 uppercase tracking-tighter">TIMESTAMP: 2023-11-24 14:02:11 UTC</span>
+</div>
+<div class="ml-4 px-2 py-0.5 bg-error-container text-error font-label-caps text-[10px] rounded border border-error/20">
+                BIAS DETECTED
+            </div>
+</div>
+<div class="flex items-center gap-md">
+<div class="flex items-center gap-sm">
+<button class="p-2 hover:bg-slate-800/50 transition-all duration-200 active:scale-95 text-slate-400">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 hover:bg-slate-800/50 transition-all duration-200 active:scale-95 text-slate-400">
+<span class="material-symbols-outlined">history</span>
+</button>
+<button class="p-2 hover:bg-slate-800/50 transition-all duration-200 active:scale-95 text-slate-400">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+<div class="h-6 w-px bg-slate-700 mx-2"></div>
+<button class="font-sans text-sm antialiased font-medium text-slate-400 hover:text-slate-200 transition-all duration-200">Sign Out</button>
+<div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center overflow-hidden border border-slate-700">
+<img alt="Auditor Profile" class="w-full h-full object-cover" data-alt="professional male auditor in a suit, clean studio lighting, corporate professional style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAA6jX6edJt6whFARnE3WB5io2NKdqNOLOM3fZnt9UdUbkL-f5lS4wMLxSSIrktIP_sQPdKUuIxyF8KCAlHxjYX-FlAQCIrw9thnpQxg8T4BQGWdTerJNafOm-vHRCRNtSt_JO8fkbbtq36aRPKpNSMNyK1MpopgJhKaurnnVq7DPWoV3ww3V__ba0NUyK239rgipUPga0e2tHNHfyfTpNM1xNwscVE1uqI_ElpjGDZxfUOODgzwIRMqADbO75deLgE6UstauzJQLNz"/>
+</div>
+</div>
+</header>
+<div class="flex h-screen pt-16">
+<!-- SideNavBar -->
+<aside class="bg-slate-900 fixed left-0 top-16 h-[calc(100vh-64px)] w-64 border-r border-slate-800 flex flex-col py-4 z-40">
+<div class="px-6 mb-8">
+<div class="text-blue-500 font-bold font-mono text-xs uppercase tracking-widest mb-1">FairSight AI</div>
+<div class="text-slate-500 font-mono text-[10px] uppercase tracking-tighter">Bias Audit Engine</div>
+</div>
+<nav class="flex-1">
+<a class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200 transition-colors duration-150 font-mono text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-[18px]">dashboard</span>
+<span>Overview</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 bg-blue-500/10 text-blue-400 border-r-2 border-blue-500 font-mono text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-[18px]">analytics</span>
+<span>Audit Report</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200 transition-colors duration-150 font-mono text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-[18px]">balance</span>
+<span>Disparate Impact</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200 transition-colors duration-150 font-mono text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-[18px]">equalizer</span>
+<span>Statistical Parity</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200 transition-colors duration-150 font-mono text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-[18px]">rule</span>
+<span>Feature Analysis</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200 transition-colors duration-150 font-mono text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-[18px]">lightbulb</span>
+<span>Recommendations</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full py-3 bg-blue-500 text-white font-mono text-xs uppercase tracking-widest rounded-lg hover:brightness-110 active:scale-95 transition-all mb-4">
+                    New Audit
+                </button>
+<div class="border-t border-slate-800 pt-4 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-2 py-2 text-slate-400 hover:text-slate-200 transition-colors font-mono text-[10px] uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-[16px]">gavel</span>
+<span>Compliance Docs</span>
+</a>
+<a class="flex items-center gap-3 px-2 py-2 text-slate-400 hover:text-slate-200 transition-colors font-mono text-[10px] uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-[16px]">settings</span>
+<span>Settings</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 overflow-y-auto p-gutter bg-background">
+<div class="max-w-7xl mx-auto space-y-gutter pb-32">
+<!-- Metrics Top Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="bg-surface-container border border-slate-800 p-lg relative overflow-hidden group">
+<div class="flex justify-between items-start mb-md">
+<span class="font-label-caps text-slate-400">DISPARATE IMPACT RATIO</span>
+<span class="material-symbols-outlined text-error text-[18px]">warning</span>
+</div>
+<div class="font-data-display text-error mb-1 text-6xl font-black">0.68</div>
+<div class="font-body-sm text-slate-500 flex items-center gap-1">
+<span class="text-error font-bold">FAIL</span>
+<span>Threshold: 0.80</span>
+</div>
+<div class="absolute bottom-0 left-0 h-1 bg-error w-2/3"></div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container border border-slate-800 p-lg relative overflow-hidden group">
+<div class="flex justify-between items-start mb-md">
+<span class="font-label-caps text-slate-400">STATISTICAL PARITY GAP</span>
+<span class="material-symbols-outlined text-error text-[18px]">priority_high</span>
+</div>
+<div class="font-data-display text-error mb-1 text-6xl font-black">-0.19</div>
+<div class="font-body-sm text-slate-500 flex items-center gap-1">
+<span class="text-error font-bold">FAIL</span>
+<span>Critical deviation in Female cohort</span>
+</div>
+<div class="absolute bottom-0 left-0 h-1 bg-error w-1/2"></div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container border border-slate-800 p-lg flex items-center justify-between">
+<div>
+<div class="font-label-caps text-slate-400 mb-md">HEALTH SCORE</div>
+<div class="font-data-display text-error mb-1 text-6xl font-black">42/100</div>
+<div class="font-body-sm text-slate-500">Unacceptable Bias Risk</div>
+</div>
+<div class="bias-gauge-container">
+<svg class="gauge-svg w-full h-full" viewbox="0 0 100 100">
+<circle class="gauge-track" cx="50" cy="50" r="45"></circle>
+<circle class="gauge-indicator" cx="50" cy="50" r="45"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center font-data-display text-error text-6xl font-black text-2xl">42%</div>
+</div>
+</div>
+</div>
+<!-- Visualization Middle Row -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+<!-- Chart 1: Outcome Rates -->
+<div class="bg-surface-container border border-slate-800 p-lg">
+<div class="flex justify-between items-center mb-lg border-b border-slate-800 pb-4 h-[40px]">
+<h3 class="font-label-caps text-on-surface">OUTCOME RATES BY GENDER</h3>
+<span class="material-symbols-outlined text-slate-500 text-[20px]">info</span>
+</div>
+<div class="space-y-6 pt-4">
+<div>
+<div class="flex justify-between text-body-sm mb-2">
+<span class="text-slate-300">Male Cohort (Privileged)</span>
+<span class="font-data-display text-white">78%</span>
+</div>
+<div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 78%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-body-sm mb-2">
+<span class="text-slate-300">Female Cohort (Unprivileged)</span>
+<span class="font-data-display text-error">53%</span>
+</div>
+<div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+<div class="bg-error h-full" style="width: 53%"></div>
+</div>
+</div>
+<div class="pt-4 border-t border-slate-800/50 mt-4">
+<p class="text-xs text-slate-500 italic">Conclusion: The model favors the Male demographic by a margin of 25%, exceeding the safe regulatory variance of 5%.</p>
+</div>
+</div>
+</div>
+<!-- Chart 2: Feature Importance -->
+<div class="bg-surface-container border border-slate-800 p-lg">
+<div class="flex justify-between items-center mb-lg border-b border-slate-800 pb-4 h-[40px]">
+<h3 class="font-label-caps text-on-surface">TOP BIAS-CONTRIBUTING FEATURES (SHAP)</h3>
+<span class="material-symbols-outlined text-slate-500 text-[20px]">leaderboard</span>
+</div>
+<div class="space-y-4 pt-2">
+<div class="flex items-center gap-4">
+<span class="w-24 text-[10px] font-mono text-slate-400">AGE</span>
+<div class="flex-1 bg-slate-800 h-4 relative">
+<div class="bg-tertiary-container h-full" style="width: 85%"></div>
+</div>
+<span class="w-10 text-[10px] font-mono text-slate-300">0.42</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="w-24 text-[10px] font-mono text-slate-400">ZIP CODE</span>
+<div class="flex-1 bg-slate-800 h-4 relative">
+<div class="bg-tertiary-container h-full" style="width: 72%"></div>
+</div>
+<span class="w-10 text-[10px] font-mono text-slate-300">0.31</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="w-24 text-[10px] font-mono text-slate-400">GENDER</span>
+<div class="flex-1 bg-slate-800 h-4 relative">
+<div class="bg-tertiary-container h-full" style="width: 65%"></div>
+</div>
+<span class="w-10 text-[10px] font-mono text-slate-300">0.28</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="w-24 text-[10px] font-mono text-slate-400">MARITAL STATUS</span>
+<div class="flex-1 bg-slate-800 h-4 relative">
+<div class="bg-slate-700 h-full" style="width: 40%"></div>
+</div>
+<span class="w-10 text-[10px] font-mono text-slate-300">0.12</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="w-24 text-[10px] font-mono text-slate-400">EDUCATION</span>
+<div class="flex-1 bg-slate-800 h-4 relative">
+<div class="bg-slate-700 h-full" style="width: 25%"></div>
+</div>
+<span class="w-10 text-[10px] font-mono text-slate-300">0.08</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Recommendations Bottom Section -->
+<div class="space-y-4">
+<h3 class="font-label-caps text-slate-400 tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+                        AI RECOMMENDATIONS &amp; MITIGATION STEPS
+                    </h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Recommendation 1 -->
+<div class="bg-surface-container-low border border-slate-800 p-md flex gap-4 hover:border-tertiary/40 transition-colors">
+<div class="w-10 h-10 rounded-lg bg-tertiary/10 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-tertiary">warning</span>
+</div>
+<div>
+<h4 class="font-body-sm font-bold text-white mb-1">Apply Reweighing</h4>
+<p class="text-[12px] text-slate-400">Assign weights to samples in the training dataset to neutralize disparate impact across Gender and Race.</p>
+</div>
+</div>
+<!-- Recommendation 2 -->
+<div class="bg-surface-container-low border border-slate-800 p-md flex gap-4 hover:border-tertiary/40 transition-colors">
+<div class="w-10 h-10 rounded-lg bg-tertiary/10 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-tertiary">rule_settings</span>
+</div>
+<div>
+<h4 class="font-body-sm font-bold text-white mb-1">Feature Masking</h4>
+<p class="text-[12px] text-slate-400">Suppress 'Zip Code' and 'Marital Status' as they are acting as strong proxies for protected classes.</p>
+</div>
+</div>
+<!-- Recommendation 3 -->
+<div class="bg-surface-container-low border border-slate-800 p-md flex gap-4 hover:border-tertiary/40 transition-colors">
+<div class="w-10 h-10 rounded-lg bg-tertiary/10 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-tertiary">published_with_changes</span>
+</div>
+<div>
+<h4 class="font-body-sm font-bold text-white mb-1">Post-processing Adjustment</h4>
+<p class="text-[12px] text-slate-400">Implement threshold moving (Equalized Odds) to equalize TPR and FPR across all subgroups.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Floating Bottom Bar -->
+<footer class="fixed bottom-gutter left-64 right-gutter z-50 flex justify-center pointer-events-none">
+<div class="bg-slate-900/90 backdrop-blur-xl border border-slate-700 px-lg py-sm rounded-full shadow-2xl pointer-events-auto flex items-center gap-lg">
+<div class="flex items-center gap-2 pr-lg border-r border-slate-700">
+<div class="w-2 h-2 rounded-full bg-error animate-pulse"></div>
+<span class="text-[10px] font-mono text-slate-400 uppercase tracking-widest">LIVE AUDIT SESSION</span>
+</div>
+<div class="flex items-center gap-md">
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-label-caps rounded-full transition-all border border-slate-600">
+<span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+                    Export PDF Report
+                </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-400 text-white text-xs font-label-caps rounded-full transition-all shadow-lg shadow-blue-500/20">
+<span class="material-symbols-outlined text-[18px]">share</span>
+                    Share Audit Link
+                </button>
+</div>
+<div class="h-8 w-px bg-slate-700"></div>
+<button class="p-2 text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</footer>
+</body></html>

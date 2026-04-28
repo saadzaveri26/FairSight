@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pandas
+scikit-learn
+fairlearn
+shap
+python-multipart
+google-generativeai
+pydantic
+numpy
